@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define fast_io ios_base::sync_with_stdio(0); cin.tie(0);
+
+
+
+void solve() {
+    int n;
+    cin >> n;
+
+    vector<ll> w(n + 1);
+    for (int i = 1; i <= n; i++) cin >> w[i];
+
+    if (n % 2 != 0) {
+        cout << "NO\n";
+        return;
+    }
+
+    ll mn_k = 1, mx_k = 2e18;
+
+    for (int i = 1; i <= n; i++) {
+        if (i % 2 != 0) {
+            mx_k = min(mx_k, w[i] - 1);
+        } else {
+            mn_k = max(mn_k, w[i] + 1);
+        }
+    }
+    
+
+    if (mn_k <= mx_k) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    fast_io;
+    int t; 
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    return 0;
+}
