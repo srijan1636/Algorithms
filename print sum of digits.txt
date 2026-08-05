@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int sum = 0;
+    
+    for(int num=145; num>0; num=num/10) {
+        int lastdigit= num%10;
+        sum =sum+lastdigit;
+    }
+    cout<<sum;
+    return 0;
+}
