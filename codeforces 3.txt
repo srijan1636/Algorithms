@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    vector<int> a(3);
+    cin >> a[0] >> a[1] >> a[2];
+    
+    int ans = 0;
+    while (1) {
+        sort(a.begin(), a.end());
+        
+        if (a[0] == a[1] || a[1] == a[2]) {
+            cout << ans << "\n";
+            return;
+        }
+        
+        a[2]--;
+        a[0]++;
+        ans++;
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+    
+    return 0;
+}
