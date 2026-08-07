@@ -11,3 +11,27 @@ int main() {
     cout<<sum;
     return 0;
 }
+
+
+logic 2:
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int num =145;
+    int sum= 0;
+    
+    while(num>0){
+        int lastdigit= num%10;
+        sum=sum+lastdigit;
+        num=num/10;
+    }
+    cout <<sum<<endl;
+    
+    return 0;
+    
+}
