@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n=234598;
+    int count=0;
+    
+    for(; n>0;n=n/10){
+        count++;
+    }
+    cout<< "The total digits are "<<count<<endl;
+    return 0;
+}
