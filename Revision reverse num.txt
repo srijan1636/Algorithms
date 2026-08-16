@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n =123;
+    int reversenum=0;
+    
+    for(;n>0;n=n/10){
+        int lastdigit=n%10;
+        reversenum=(reversenum*10+lastdigit);
+    }
+    cout<<"The Reverse Number is: "<<reversenum<<endl;
+    return 0;
+}
