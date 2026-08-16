@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+
+    if (n == 1) {
+        cout << "1\n";
+        return;
+    }
+    if (n == 2) {
+        cout << "-1\n";
+        return;
+    }
+
+    cout << "1 2 3";
+    long long s = 6;
+    
+    for (int i = 4; i <= n; i++) {
+        cout << " " << s;
+        s += s;
+    }
+    cout << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int tc;
+    if (cin >> tc) {
+        while (tc--) solve();
+    }
+    return 0;
+}
