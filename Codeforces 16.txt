@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    
+    int mask = 0;
+    for(int i = 0; i < n; i++) {
+        string s;
+        cin >> s;
+        mask |= (1 << (s[0] - 'a'));
+    }
+    
+    string arr[105];
+    for(int i = 0; i < m; i++) {
+        cin >> arr[i];
+    }
+    
+    int vis[105] = {0};
+    int cnt = 0;
+    
+    while(true) {
+        int prev = cnt;
+        for(int i = 0; i < m; i++) {
+            if(vis[i]) continue;
+            
+            int ok = 1;
+            for(char c : arr[i]) {
+                if((mask & (1 << (c - 'A'))) == 0) {
+                    ok = 0;
+                    break;
+                }
+            }
+            
+            if(ok) {
+                vis[i] = 1;
+                cnt++;
+                mask |= (1 << (arr[i][0] - 'A'));
+            }
+        }
+        if(prev == cnt) break;
+    }
+    
+    if(cnt == m) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if(cin >> t) {
+        while(t--) {
+            solve();
+        }
+    }
+    return 0;
+}
