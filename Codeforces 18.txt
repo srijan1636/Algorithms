@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    string s;
+    cin >> s;
+    int n = s.size();
+
+    string best_alice = "";
+    bool first_alice = true;
+
+    for (int i = 0; i < n; i++) {
+        if (s[i] != '0') continue;
+
+        string s1 = s.substr(0, i) + s.substr(i + 1);
+
+        string best_bob = "";
+        bool first_bob = true;
+
+        for (int j = 0; j < (int)s1.size(); j++) {
+            if (s1[j] != '1') continue;
+
+            string s2 = s1.substr(0, j) + s1.substr(j + 1);
+
+            if (first_bob || s2 < best_bob) {
+                best_bob = s2;
+                first_bob = false;
+            }
+        }
+
+        if (first_alice || best_bob > best_alice) {
+            best_alice = best_bob;
+            first_alice = false;
+        }
+    }
+
+    cout << best_alice << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int t;
+    if (cin >> t) {
+        while (t--) {
+            solve();
+        }
+    }
+    return 0;
+}
