@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    
+    vector<int> F(m + 2, 0), P(m + 2, 0);
+    for(int i=0, x; i<n; i++) {
+        cin >> x;
+        F[x]++;
+    }
+    
+    for(int i=1; i<=m; i++) {
+        P[i] = P[i-1] + F[i];
+    }
+    
+    vector<ll> B(m + 2, 0);
+    ll mx = 0;
+    
+    for(int y=1; y<=m; y++) {
+        ll cur = 0;
+        for(int c=1; c*y<=m; c++) {
+            int L = c * y;
+            int R = min(m, (c + 1) * y - 1);
+            cur += (ll)(P[R] - P[L-1]) * c;
+        }
+        B[y] = cur;
+        mx = max(mx, cur);
+    }
+    
+    for(int k=1; k<=m; k++) {
+        if(k > 20 || (1LL << k) > m) {
+            cout << mx << " ";
+            continue;
+        }
+        
+        ll ans = 0;
+        ll p2 = 1LL << k;
+        ll mk = p2 - 1;
+        
+        for(int y=1; y<=m; y++) {
+            if(y * p2 > m) {
+                ans = max(ans, B[y]);
+            } else {
+                ll sub = 0;
+                for(int c=p2; c*y<=m; c++) {
+                    int L = c * y;
+                    int R = min(m, (c + 1) * y - 1);
+                    sub += (ll)(P[R] - P[L-1]) * (c - mk);
+                }
+                ans = max(ans, B[y] - sub + F[y * p2]);
+            }
+        }
+        cout << ans << " ";
+    }
+    cout << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if(cin >> t) {
+        while(t--) solve();
+    }
+    return 0;
+}
