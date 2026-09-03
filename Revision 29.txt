@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define pb push_back
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for(ll &x : a) cin >> x;
+
+    vector<ll> d;
+    for(int i = 0; i < n - 1; i++) {
+        d.pb(a[i+1] - a[i]);
+    }
+
+    int len = d.size();
+    int st = 0;
+    
+    while(st < len) {
+        int en = st;
+        while(en < len && (abs(d[en]) % 2) == (abs(d[st]) % 2)) en++;
+        sort(d.begin() + st, d.begin() + en);
+        st = en;
+    }
+
+    cout << a[0] << " ";
+    ll cur = a[0];
+    
+    for(int i = 0; i < len; i++) {
+        cur += d[i];
+        cout << cur << " ";
+    }
+    cout << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    if (cin >> t) {
+        while(t--) solve();
+    }
+    return 0;
+}
