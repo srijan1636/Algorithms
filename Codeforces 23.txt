@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int L[5005], R[5005], U[5005], V[5005];
+
+void solve() {
+    int n;
+    cin >> n;
+    for(int i = 1; i <= n; i++) {
+        cin >> L[i] >> R[i] >> U[i] >> V[i];
+    }
+    
+    for(int m = n; m >= 1; m--) {
+        int cur = 1;
+        int count = 0;
+        
+        for(int j = 1; j <= m; j++) {
+            int k = m - j + 1;
+            while(cur <= n) {
+                int i = cur++;
+                if((j < L[i] || j > R[i]) && (k < U[i] || k > V[i])) {
+                    count++;
+                    break;
+                }
+            }
+        }
+        
+        if(count == m) {
+            cout << m << "\n";
+            return;
+        }
+    }
+    
+    cout << 0 << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if(cin >> t) {
+        while(t--) {
+            solve();
+        }
+    }
+    return 0;
+}
