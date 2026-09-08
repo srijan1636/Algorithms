@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<ll> v;
+    for(int i = 0; i < n; i++) {
+        ll x;
+        cin >> x;
+        if(x > 0) v.push_back(x);
+    }
+    
+    if(v.empty()) {
+        cout << 0 << "\n";
+        return;
+    }
+    
+    sort(v.begin(), v.end());
+    int m = v.size();
+    ll l = m, r = m + 40;
+    ll ans = r;
+    
+    while(l <= r) {
+        ll mid = l + (r - l) / 2;
+        ll k = max(0LL, mid - 32);
+        ll keep = m - min((ll)m, k);
+        
+        priority_queue<ll> pq;
+        for(int i = 0; i < keep; i++) {
+            pq.push(v[i]);
+        }
+        
+        ll lim = min(mid, 32LL);
+        for(ll b = lim - 1; b >= 0; b--) {
+            if(pq.empty()) break;
+            ll top = pq.top();
+            pq.pop();
+            top -= (1LL << b);
+            if(top > 0) pq.push(top);
+        }
+        
+        if(pq.empty()) {
+            ans = mid;
+            r = mid - 1;
+        } else {
+            l = mid + 1;
+        }
+    }
+    
+    cout << ans << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if(cin >> t) {
+        while(t--) solve();
+    }
+    return 0;
+}
