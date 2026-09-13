@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    int c1 = 0, c2 = 0;
+
+    for (int start = 0; start < 2; start++) {
+        bool ok = true;
+        for (int i = 0; i < n; i += 2) {
+            if (s[i] != '?' && (s[i] - '0') != (start ^ ((i >> 1) & 1))) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) c1++;
+    }
+
+    for (int start = 0; start < 2; start++) {
+        bool ok = true;
+        for (int i = 1; i < n; i += 2) {
+            if (s[i] != '?' && (s[i] - '0') != (start ^ ((i >> 1) & 1))) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) c2++;
+    }
+
+    long long ans = (1LL * c1 * c2) % 998244353;
+    cout << ans << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    int t;
+    cin >> t;
+    while (t--) solve();
+    return 0;
+}
