@@ -1,0 +1,50 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+void solve() {
+    int n;
+    cin >> n;
+    
+    int p[105];
+    for (int i = 1; i <= n; i++) {
+        cin >> p[i];
+    }
+    
+    int bad_idx[105];
+    int k = 0;
+    
+    for (int i = 1; i <= n; i++) {
+        if (p[i] != i) {
+            bad_idx[k++] = i;
+        }
+    }
+    
+    if (k == 0) {
+        cout << "YES\n";
+        return;
+    }
+    
+    bool ok = true;
+    for (int i = 0; i < k; i++) {
+        if (p[bad_idx[i]] != bad_idx[k - 1 - i]) {
+            ok = false;
+            break;
+        }
+    }
+    
+    if (ok) cout << "YES\n";
+    else cout << "NO\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if (cin >> t) {
+        while (t--) {
+            solve();
+        }
+    }
+    return 0;
+}
