@@ -1,0 +1,62 @@
+#include "bits/stdc++.h"
+using namespace std;
+
+using ll = long long;
+
+const int MAXN = 200005;
+int mark[MAXN];
+int out_arr[MAXN];
+
+void solve() {
+    int n;
+    cin >> n;
+    
+    
+    for(int i = 0; i <= n + 1; i++) {
+        mark[i] = 0;
+    }
+    
+    for (ll i = 1; i <= n; i++) {
+        ll a;
+        cin >> a;
+        
+        ll st = a * i;
+        ll ed = (a + 1) * i;
+        
+        if (st < n) {
+            mark[st]++;
+            if (ed < n) {
+                mark[ed]--;
+            }
+        }
+    }
+    
+    int out_size = 0;
+    int sum = 0;
+    
+    for (int i = 0; i < n; i++) {
+        sum += mark[i];
+        if (sum == 0) {
+            out_arr[out_size++] = i;
+        }
+    }
+    
+    cout << out_size << "\n";
+    for (int i = 0; i < out_size; i++) {
+        cout << out_arr[i] << " ";
+    }
+    cout << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int tc;
+    if (cin >> tc) {
+        while (tc--) {
+            solve();
+        }
+    }
+    return 0;
+}
