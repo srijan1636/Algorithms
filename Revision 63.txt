@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+
+void solve() {
+    ll n, m;
+    cin >> n >> m;
+    
+    ll a1, b1, tmp;
+    
+    cin >> a1;
+    for (int i = 1; i < n; i++) {
+        cin >> tmp;
+    }
+    
+    cin >> b1;
+    for (int i = 1; i < m; i++) {
+        cin >> tmp;
+    }
+    
+    ll b_score = a1 + n - 1;
+    ll v_score = b1 + m - 1;
+    
+    if (b_score >= v_score) {
+        cout << 1 << "\n";
+    } else {
+        cout << 2 << "\n";
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
+    int t;
+    if (cin >> t) {
+        while (t--) {
+            solve();
+        }
+    }
+    return 0;
+}
