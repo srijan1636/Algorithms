@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for(int &x : v) cin >> x;
+
+    vector<pair<int, int>> arr;
+    for(int i = 0; i < n; i++) {
+        if(arr.empty() || arr.back().first != v[i]) {
+            arr.pb({v[i], 1});
+        } else {
+            arr.back().second++;
+        }
+    }
+
+    int k = arr.size();
+    int extra = 0;
+
+    for(int i = 0; i < k - 1; i++) {
+        if(arr[i].second > 1 && arr[i+1].second > 1) {
+            extra = 2;
+            break;
+        }
+    }
+
+    if(extra == 0) {
+        for(int i = 0; i < k; i++) {
+            if(arr[i].second > 1) {
+                bool ok1 = (i + 1 < k) && (i + 2 >= k || arr[i+2].first != arr[i].first);
+                bool ok2 = (i > 0) && (i - 2 < 0 || arr[i-2].first != arr[i].first);
+                if(ok1 || ok2) {
+                    extra = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    cout << k + extra << "\n";
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int tc;
+    if (cin >> tc) {
+        while(tc--) {
+            solve();
+        }
+    }
+    return 0;
+}
