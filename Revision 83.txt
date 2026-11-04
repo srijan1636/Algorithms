@@ -1,0 +1,37 @@
+class LRUCache {
+private:
+    int maxCapacity;
+    list< pair< int, int > > lru;
+    unordered_map< int, list< pair< int, int > >::iterator > map;
+
+public:
+    LRUCache(int capacity) {
+        maxCapacity = capacity;
+    }
+    
+    int get(int key) {
+        if (map.find(key) == map.end()) {
+            return -1;
+        }
+        
+        lru.splice(lru.begin(), lru, map[key]);
+        return map[key]->second;
+    }
+    
+    void put(int key, int value) {
+        if (map.find(key) != map.end()) {
+            lru.splice(lru.begin(), lru, map[key]);
+            map[key]->second = value;
+            return;
+        }
+        
+        if (map.size() == maxCapacity) {
+            int evictKey = lru.back().first;
+            lru.pop_back();
+            map.erase(evictKey);
+        }
+        
+        lru.push_front({key, value});
+        map[key] = lru.begin();
+    }
+};
